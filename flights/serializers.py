@@ -26,3 +26,5 @@ class BookingUpdateListView(serializers.ModelSerializer):
     class Meta:
         model = Booking
         feilds = ["date","passengers"]
+
+
