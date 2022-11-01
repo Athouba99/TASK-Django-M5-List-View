@@ -1,3 +1,4 @@
+from pyexpat import model
 from rest_framework import serializers
 from .models import Booking, Flight
 
@@ -19,3 +20,9 @@ class BookingDetalListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
         feilds = ["id","flight","date","passengers"]
+
+
+class BookingUpdateListView(serializers.ModelSerializer):
+    class Meta:
+        model = Booking
+        feilds = ["date","passengers"]

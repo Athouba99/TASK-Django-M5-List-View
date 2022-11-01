@@ -1,6 +1,7 @@
 #in DRF the views are class based
+from datetime import date
 from pytz import timezone
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, RetrieveAPIView, DestroyAPIView
 from .models import Booking, Flight
 from flights.serializers import FlightListSerializer,BookingListSerializer, BookingDetalListSerializer 
 from django.utils import timezone
@@ -18,8 +19,19 @@ class BookingListView(ListAPIView): #3rd view
     serializer_class = BookingListSerializer # user the same serializer as 2nd view, using the same field to display 
 
 # Task 2
-class BookingDetailListView(ListAPIView):#4th view
+class BookingDetailListView(RetrieveAPIView):#4th view
     queryset = Booking.objects.all()
     serializer_class = BookingDetalListSerializer 
-    lookup_field = "id", #identifying the objects
+    lookup_field = "id" #identifying the objects
     lookup_url_kwarg = "object_id"
+
+
+class BookingUpdateListView(RetrieveUpdateAPIView):
+    queryset = Booking.objects.all()
+    serializer_class = BookingDetalListSerializer
+    lookup_field = "id"
+    lookup_url_kwarg = "object_id"
+
+
+class DeleteBookingListView(DestroyAPIView):
+
