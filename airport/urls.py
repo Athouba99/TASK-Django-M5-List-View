@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from flights.views import BookingListView, FlightListView, BookingDetailListView, BookingUpdateListView,DeleteBookingListView
-from users.views import RegisterAPIView
+from users.views import RegisterAPIView,LoginAPIView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,6 +30,6 @@ urlpatterns = [
     # Task 3: Register view  
     path("register/", RegisterAPIView.as_view(), name="register"),
     # Task 4: Creat & login view
-    path("login/",name="login"),  
+    path("login/",LoginAPIView.as_view(),name="login"),  
 
 ]

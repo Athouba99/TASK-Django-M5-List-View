@@ -23,7 +23,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return validated_data
 
 # Task 4 : create & login view
-
 class LoginSerializer(serializers.Serializer): # no modelserializer to login because login don't make objs 
     username = serializers.CharField()
     password = serializers.CharField(wirte_only=True) # write only passed to the attribute to hash the password
@@ -39,7 +38,7 @@ class LoginSerializer(serializers.Serializer): # no modelserializer to login bec
 
     if not user.check_password(password):
         '''
-        return #data [check which lib its from ]
+        return data #[check which lib its from ]
           '''
     else:
         raise serializers.ValidationError("Incorrect username or password ")
