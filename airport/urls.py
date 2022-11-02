@@ -29,6 +29,7 @@ urlpatterns = [
     path("delete/", DeleteBookingListView.as_view(), name="cancel-booking"),
     # Task 3: Register view  
     path("register/", RegisterAPIView.as_view(), name="register"),
-     
+    # Task 4: Creat & login view
+    path("login/",name="login"),  
 
 ]
