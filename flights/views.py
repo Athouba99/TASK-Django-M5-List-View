@@ -5,6 +5,21 @@ from rest_framework.generics import ListAPIView, RetrieveUpdateAPIView, Retrieve
 from .models import Booking, Flight
 from flights.serializers import FlightListSerializer,BookingListSerializer, BookingDetalListSerializer 
 from django.utils import timezone
+from django.contrib.auth.models import User
+from rest_framework import serializers
+from .serializers import FlightListSerializer,RegisterSerializer,LoginSerializer,CreateFlightSerilazer
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser 
+# Task 3 in DRF registration
+
+from django.shortcuts import render
+from rest_framework.generics import CreateAPIView
+
+
+# Task 4 in DRF Create & login view
+from rest_framework.response import Response
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from rest_framework.views import APIView
+
 
 class FlightListView(ListAPIView): #1rt view
     queryset = Flight.objects.all()#fetch all the flight instances
@@ -38,3 +53,31 @@ class DeleteBookingListView(DestroyAPIView):
     serializer_class = BookingListView
     lookup_field = "id"
     lookup_url_kwarg = "object_id"
+
+# Task 3 register
+class RegisterAPIView(CreateAPIView):
+    serializer_class = RegisterSerializer
+
+#Task 4 create & login 
+class LoginAPIView(APIView):
+    serializer_class = LoginSerializer
+
+    def post(self, request):
+        data = request.data
+        serializer = LoginSerializer(data=data)
+
+        if serializer.is_valid(raise_exception=True):
+            valid_data = serializer.data
+            return Response(valid_data, status=HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+# Task 5 
+
+class CreateFlight(CreateAPIView):
+     queryset = Booking.objects.all()
+     serializer_class = CreateFlightSerilazer
+     permission_classes = [IsAuthenticated]
+
+
+

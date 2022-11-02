@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from flights.views import BookingListView, FlightListView, BookingDetailListView, BookingUpdateListView,DeleteBookingListView
-from users.views import RegisterAPIView,LoginAPIView
+from flights.views import RegisterAPIView,LoginAPIView,CreateFlight
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,12 +24,14 @@ urlpatterns = [
     path("flights/", FlightListView.as_view(), name="flights-list"),
     path("booking/", BookingListView.as_view(), name="booking-list"), 
     # Task 2: API CRUD 
-    path("details/<int:object_id>/",BookingDetailListView.as_view(), name="booking-details"),
+    path("details/<int:bokking_id>/",BookingDetailListView.as_view(), name="booking-details"),
     path("update/", BookingUpdateListView.as_view(), name="booking-update"),
     path("delete/", DeleteBookingListView.as_view(), name="cancel-booking"),
     # Task 3: Register view  
     path("register/", RegisterAPIView.as_view(), name="register"),
     # Task 4: Creat & login view
-    path("login/",LoginAPIView.as_view(),name="login"),  
-
-]
+    path("login/",LoginAPIView.as_view(),name="login"), 
+    path("flight/<int:flight_id>", name="flight-id"),
+    # Task5
+    path("bookflight/",CreateFlight.as_view(),name="book-flight"), 
+ ]
