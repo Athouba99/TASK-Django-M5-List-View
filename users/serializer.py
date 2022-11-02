@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True) # to make the hashing for the password 
+    password = serializers.CharField(write_only=True) # to hashi the user password and not return with the request 
     class Meta:
         model = User 
         feilds = "username", "password", "first_name", "last_name"

@@ -16,14 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from flights.views import BookingListView, FlightListView, BookingDetailListView, BookingUpdateListView,DeleteBookingListView
+from users.views import RegisterAPIView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # Task 1: list view 
     path("flights/", FlightListView.as_view(), name="flights-list"),
     path("booking/", BookingListView.as_view(), name="booking-list"), 
-    # Task 2 
+    # Task 2: API CRUD 
     path("details/<int:object_id>/",BookingDetailListView.as_view(), name="booking-details"),
     path("update/", BookingUpdateListView.as_view(), name="booking-update"),
-    path("delete/",DeleteBookingListView.as_view(), name="cancel-booking"),
-    
+    path("delete/", DeleteBookingListView.as_view(), name="cancel-booking"),
+    # Task 3: Register view  
+    path("register/", RegisterAPIView.as_view(), name="register"),
+     
+
 ]
